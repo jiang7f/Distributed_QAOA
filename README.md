@@ -23,7 +23,6 @@ conda remove -n choco_xxx --all
 2. conda activate choco_gpu
 3. pip install .
 
-
 ## 测试
 
 根据按装环境测试运行对应测试文件:
@@ -33,6 +32,7 @@ conda remove -n choco_xxx --all
 看到 "Environment configuration is successful!" 即表示配置成功
 
 配置失败考虑：
+
 1. 终端是否正确activate对应conda环境
 2. 是否在切换后执行 pip install . 安装chocoq库
 3. python执行环境是否选择对应conda环境
