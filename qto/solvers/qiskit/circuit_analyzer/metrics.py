@@ -33,10 +33,10 @@ class Metrics:
         self._latency = Latency(backend=backend)
         self.width = self._circuit.width()
         self.depth = self._circuit.depth()
-        self.one_qubit_gates = [node.op for node in self._dagcircuit._multi_graph.nodes() if isinstance(node, DAGOpNode) and len(node.qargs) == 1]
-        self.two_qubit_gates = [node.op for node in self._dagcircuit._multi_graph.nodes() if isinstance(node, DAGOpNode) and len(node.qargs) == 2]
-        self.num_one_qubit_gates = len(self.one_qubit_gates)
-        self.num_two_qubit_gates = len(self.two_qubit_gates)
+        # self.one_qubit_gates = [node.op for node in self._dagcircuit._multi_graph.nodes() if isinstance(node, DAGOpNode) and len(node.qargs) == 1]
+        # self.two_qubit_gates = [node.op for node in self._dagcircuit._multi_graph.nodes() if isinstance(node, DAGOpNode) and len(node.qargs) == 2]
+        # self.num_one_qubit_gates = len(self.one_qubit_gates)
+        # self.num_two_qubit_gates = len(self.two_qubit_gates)
         self.size = self._circuit.size()
         self._latency_dict = None
         self.culled_depth = self.get_depth_without_one_qubit_gate()
@@ -45,7 +45,7 @@ class Metrics:
         return self.latency_dict[qubit]
 
     @property
-    def latency_all(self):
+    def latency(self):
         return max(self.latency_dict.values())
     
     # @property
@@ -92,14 +92,16 @@ if __name__ == '__main__':
     metrics = Metrics(qc, FakeQuebec())
     print(f'width: {metrics.width}')
     print(f'depth: {metrics.depth}')
-    print(f'one_qubit_gates: {metrics.one_qubit_gates}')
-    print(f'two_qubit_gates: {metrics.two_qubit_gates}')
-    print(f'num_one_qubit_gates: {metrics.num_one_qubit_gates}')
-    print(f'num_two_qubit_gates: {metrics.num_two_qubit_gates}')
+    # print(f'one_qubit_gates: {metrics.one_qubit_gates}')
+    # print(f'two_qubit_gates: {metrics.two_qubit_gates}')
+    # print(f'num_one_qubit_gates: {metrics.num_one_qubit_gates}')
+    # print(f'num_two_qubit_gates: {metrics.num_two_qubit_gates}')
     print(f'size: {metrics.size}')
-    print(f'latency_all(): {metrics.latency_all}')
+    print(f'latency_all(): {metrics.latency}')
     print(f'get_depth_without_one_qubit_gate(): {metrics.get_depth_without_one_qubit_gate()}')
-    print(metrics.latency_estimation)
+    # print(metrics.latency_estimation)
+
+    
     # def qubit_utilizztion(self): 
     #     ### caculate the latency of whole circuits
     #     gate_latency = {q: 0 for q in self._qargs}

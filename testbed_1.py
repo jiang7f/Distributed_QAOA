@@ -30,16 +30,16 @@ print(f"optimize_cost: {optimize}\n\n")
 opt = CobylaOptimizer(max_iter=2)
 aer = DdsimProvider()
 gpu = AerGpuProvider()
-fake = FakeBrisbaneProvider()
+fake = FakeKyivProvider()
 # opt = AdamOptimizer(max_iter=200)
-solver = QtoSimplifyDiscardSegmentedFilterSolver(
+solver = QtoSimplifyDiscardSolver(
     prb_model=m,  # 问题模型
     optimizer=opt,  # 优化器
     provider=fake,  # 提供器（backend + 配对 pass_mannager ）
     num_layers=1,
     # mcx_mode="linear",
 )
-print(solver.circuit_analyze(['depth', 'width', 'culled_depth', 'num_one_qubit_gates']))
+print(solver.circuit_analyze(['depth', 'width', 'latency']))
 # print(solver.search())
 result = solver.solve()
 eval = solver.evaluation()
